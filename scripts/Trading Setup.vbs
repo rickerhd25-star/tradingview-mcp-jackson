@@ -30,9 +30,11 @@ oShell.Run "wscript.exe ""C:\Users\ricke\AppData\Local\hermes\start_hermes.vbs""
 WScript.Sleep 500
 oShell.Run "cmd /k ""cd /d C:\Users\ricke\tradingview-mcp-jackson && claude""", 1, False
 
-' 8. Activate Windows Voice Typing (Win+H) — normal window so process has foreground rights
-WScript.Sleep 3000
-oShell.Run "powershell -NoProfile -ExecutionPolicy Bypass -File """ & scriptDir & "voice_typing.ps1""", 1, False
+' 8. Schedule Win+H via Task Scheduler — interactive user session has full UI rights
+WScript.Sleep 1000
+Dim psFile
+psFile = scriptDir & "voice_typing.ps1"
+oShell.Run "schtasks /create /tn ""WinHVoiceOnce"" /tr ""powershell -NoProfile -ExecutionPolicy Bypass -File '" & psFile & "'"" /sc once /st " & Format(Now + TimeSerial(0,0,20), "HH:mm:ss") & " /f", 0, True
 
 ' 9. Voice confirmation once everything is up
 WScript.Sleep 2000
