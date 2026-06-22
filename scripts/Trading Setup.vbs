@@ -22,17 +22,17 @@ oShell.Run "http://localhost:3333"
 WScript.Sleep 500
 oShell.Run "https://railway.com/project/7c96f024-ef3a-4d2f-9afa-2d3d5cd9c67f/service/9a79abf1-7b9f-490b-be43-cee90b20e586"
 
-' 6. Start Hermes gateway in background (hidden)
+' 6. Launch Hermes (gateway check + chat window)
 WScript.Sleep 500
-oShell.Run """C:\Users\ricke\AppData\Local\hermes\gateway-service\Hermes_Gateway.cmd""", 0, False
+oShell.Run "wscript.exe ""C:\Users\ricke\AppData\Local\hermes\start_hermes.vbs""", 0, False
 
 ' 7. Open Claude Code in a cmd window in the MCP project directory
 WScript.Sleep 500
 oShell.Run "cmd /k ""cd /d C:\Users\ricke\tradingview-mcp-jackson && claude""", 1, False
 
-' 8. Activate Windows Voice Typing (Win+H) via keybd_event
-WScript.Sleep 1000
-oShell.Run "powershell -NoProfile -WindowStyle Hidden -Command ""Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class KB { [DllImport(""user32.dll"")] public static extern void keybd_event(byte v, byte s, uint f, UIntPtr e); public static void WinH() { keybd_event(0x5B,0,0,UIntPtr.Zero); keybd_event(0x48,0,0,UIntPtr.Zero); keybd_event(0x48,0,2,UIntPtr.Zero); keybd_event(0x5B,0,2,UIntPtr.Zero); } }'; [KB]::WinH()""", 0, False
+' 8. Activate Windows Voice Typing (Win+H) — focus desktop first so keypress registers
+WScript.Sleep 2000
+oShell.Run "powershell -NoProfile -WindowStyle Hidden -Command ""$sh = New-Object -ComObject WScript.Shell; $sh.AppActivate('Program Manager'); Start-Sleep -Milliseconds 500; Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class KB { [DllImport(""user32.dll"")] public static extern void keybd_event(byte v, byte s, uint f, UIntPtr e); public static void WinH() { keybd_event(0x5B,0,0,UIntPtr.Zero); keybd_event(0x48,0,0,UIntPtr.Zero); keybd_event(0x48,0,2,UIntPtr.Zero); keybd_event(0x5B,0,2,UIntPtr.Zero); } }'; [KB]::WinH()""", 0, False
 
 ' 9. Voice confirmation once everything is up
 WScript.Sleep 2000
