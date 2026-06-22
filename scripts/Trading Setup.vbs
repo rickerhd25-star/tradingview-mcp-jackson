@@ -30,9 +30,9 @@ oShell.Run "wscript.exe ""C:\Users\ricke\AppData\Local\hermes\start_hermes.vbs""
 WScript.Sleep 500
 oShell.Run "cmd /k ""cd /d C:\Users\ricke\tradingview-mcp-jackson && claude""", 1, False
 
-' 8. Activate Windows Voice Typing (Win+H)
-WScript.Sleep 2000
-oShell.Run "powershell -NoProfile -ExecutionPolicy Bypass -File """ & scriptDir & "voice_typing.ps1""", 0, False
+' 8. Activate Windows Voice Typing (Win+H) — minimized window so process has foreground rights
+WScript.Sleep 3000
+oShell.Run "powershell -NoProfile -ExecutionPolicy Bypass -WindowStyle Minimized -File """ & scriptDir & "voice_typing.ps1""", 2, False
 
 ' 9. Voice confirmation once everything is up
 WScript.Sleep 2000
