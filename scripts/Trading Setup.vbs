@@ -30,6 +30,10 @@ oShell.Run """C:\Users\ricke\AppData\Local\hermes\gateway-service\Hermes_Gateway
 WScript.Sleep 500
 oShell.Run "cmd /k ""cd /d C:\Users\ricke\tradingview-mcp-jackson && claude""", 1, False
 
-' 8. Voice confirmation once everything is up
-WScript.Sleep 3000
+' 8. Activate Windows Voice Typing (Win+H) via keybd_event
+WScript.Sleep 1000
+oShell.Run "powershell -NoProfile -WindowStyle Hidden -Command ""Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class KB { [DllImport(""user32.dll"")] public static extern void keybd_event(byte v, byte s, uint f, UIntPtr e); public static void WinH() { keybd_event(0x5B,0,0,UIntPtr.Zero); keybd_event(0x48,0,0,UIntPtr.Zero); keybd_event(0x48,0,2,UIntPtr.Zero); keybd_event(0x5B,0,2,UIntPtr.Zero); } }'; [KB]::WinH()""", 0, False
+
+' 9. Voice confirmation once everything is up
+WScript.Sleep 2000
 oVoice.Speak "Trading setup complete. Good luck today."
