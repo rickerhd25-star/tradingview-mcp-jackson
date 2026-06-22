@@ -17,3 +17,7 @@ oShell.Run "http://localhost:3333"
 ' 5. Open Railway logs in a new browser tab (short delay so tabs open in order)
 WScript.Sleep 500
 oShell.Run "https://railway.com/project/7c96f024-ef3a-4d2f-9afa-2d3d5cd9c67f/service/9a79abf1-7b9f-490b-be43-cee90b20e586"
+
+' 6. Open Claude Code in a cmd window in the MCP project directory
+WScript.Sleep 500
+oShell.Run "cmd /k ""cd /d C:\Users\ricke\tradingview-mcp-jackson && claude""", 1, False
