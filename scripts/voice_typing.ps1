@@ -26,3 +26,5 @@ public class WinInput {
 
 Start-Sleep -Seconds 2
 [WinInput]::SendWinH()
+Start-Sleep -Milliseconds 500
+exit
